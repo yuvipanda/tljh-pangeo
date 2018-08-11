@@ -16,5 +16,7 @@ def tljh_config_post_install(config):
     """
     Set JupyterLab to be default
     """
-    if 'user_environment' not in config or 'default_app' not in config['user_environment']:
-        config['user_environment']['default_app'] = 'jupyterlab'
+    user_environment = config.get('user_environment', {})
+    user_environment['default_app'] = user_environment.get('default_app', 'jupyterlab')
+
+    config['user_environment'] = user_environment
